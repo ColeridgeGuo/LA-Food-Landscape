@@ -11,17 +11,20 @@
 			}
 			#map {
 				height: 85%;
+        width: 80%;
+        padding: 20px;
 			}
 			#filter {
 				float: left;
+        margin: 20px;
 			}
       #filterList {
         list-style-type: none;
+        margin: 0; /* To remove default bottom margin */
+        padding: 0; /* To remove default left padding */
       }
 			html, body {
-				height: 100%;
-				margin: 20px;
-				padding: 20px;
+				height: 95%;
 			}
 		</style>
 	</head>
@@ -30,6 +33,7 @@
 			<h1>LA Food Landscape</h1>
 		</div>
 		<div id="filter">
+      <h2>Food Categories</h2>
 			<ul id="filterList">
         <li><input type="checkbox" id="HR" >Healthy Restaurants</li>
 				<li><input type="checkbox" id="FFR">Fast Food Restaurants</li>
