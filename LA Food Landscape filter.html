@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LA Food Landscape</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<style>
+      #header {
+        float: top;
+				height: 10%;
+			}
+			#map {
+        height: 85%;
+        width: 80%;
+        padding: 20px;
+			}
+			#filter {
+				float: left;
+        margin: 20px;
+			}
+      #filterList {
+        list-style-type: none;
+        margin: 0; /* To remove default bottom margin */
+        padding: 0; /* To remove default left padding */
+      }
+			html, body {
+				height: 95%;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="header">
+			<h1>LA Food Landscape</h1>
+		</div>
+
+		<div id="filter">
+      <h2>Food Categories</h2>
+			<ul id="filterList">
+        <li><input type="checkbox" id="HR" >Healthy Restaurants</li>
+        <li><input type="checkbox" id="UH" >Unhealthy Restaurants</li>
+				<li><input type="checkbox" id="VR" >Vegan Restaurants</li>
+				<li><input type="checkbox" id="SM" >Supermarkets</li>
+				<li><input type="checkbox" id="GS" >Grocery Stores</li>
+        <li><input type="checkbox" id="OT" >Others</li>
+			</ul>
+		</div>
+
+		<div id="map"></div>
+
+		<script>
+      var map;
+      var markers = [];
+
+      // after the geojson is loaded, iterate through the map data to create markers
+      // and add the pop up (info) windows
+      function loadMarkers() {
+        console.log('creating markers');
+        map.data.forEach(function(feature) {
+          
+          var latLng = feature.getGeometry().get();
+          var title = feature.getProperty('Name');
+
+          var marker = new google.maps.Marker({
+            position: latLng,
+            title: title,
+            map: map
+          });
+
+          markers.push(marker)
+        });
+      }
+
+      function initMap() {
+        console.log('initializing map');
+        var map_center = new google.maps.LatLng(34.039435,-118.246928);
+        var map_options = {
+          zoom: 10,
+          center: map_center
+        };
+
+        var map_document = document.getElementById('map');
+        map = new google.maps.Map(map_document, map_options);
+
+        geojson_url = 'GeoJSON_data/fake_data.geojson';
+        console.log('loading geojson');
+        map.data.loadGeoJson(geojson_url, null, loadMarkers);
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABK3DsKer5m90lhENpsR-16mWZ5D-2NNA&libraries=places&callback=initMap"
+            async defer></script>
+	</body>
+</html>
