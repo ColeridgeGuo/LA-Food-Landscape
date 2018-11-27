@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>LA Food Landscape</title>
+		<title>LA Food Landscape with filter</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="jquery-3.3.1.js"></script>
 		<meta charset="utf-8">
 		<style>
       #header {
@@ -38,12 +39,12 @@
 		<div id="filter">
       <h2>Food Categories</h2>
 			<ul id="filterList">
-        <li><input type="checkbox" id="HR" >Healthy Restaurants</li>
-        <li><input type="checkbox" id="UH" >Unhealthy Restaurants</li>
-				<li><input type="checkbox" id="VR" >Vegan Restaurants</li>
-				<li><input type="checkbox" id="SM" >Supermarkets</li>
-				<li><input type="checkbox" id="GS" >Grocery Stores</li>
-        <li><input type="checkbox" id="OT" >Others</li>
+        <li><input type="checkbox" name="filter" id="HR" >Healthy Restaurants</li>
+        <li><input type="checkbox" name="filter" id="UH" >Unhealthy Restaurants</li>
+				<li><input type="checkbox" name="filter" id="VR" >Vegan Restaurants</li>
+				<li><input type="checkbox" name="filter" id="SM" >Supermarkets</li>
+				<li><input type="checkbox" name="filter" id="GS" >Grocery Stores</li>
+        <li><input type="checkbox" name="filter" id="OT" >Others</li>
 			</ul>
 		</div>
 
@@ -54,20 +55,17 @@
       var markers = [];
 
       // after the geojson is loaded, iterate through the map data to create markers
-      // and add the pop up (info) windows
       function loadMarkers() {
         console.log('creating markers');
         map.data.forEach(function(feature) {
-          
+
           var latLng = feature.getGeometry().get();
           var title = feature.getProperty('Name');
-
           var marker = new google.maps.Marker({
             position: latLng,
             title: title,
             map: map
           });
-
           markers.push(marker)
         });
       }
