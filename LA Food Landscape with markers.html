@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>LA Food Landscape</title>
+		<title>LA Food Landscape with markers</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
 		<style>
@@ -54,20 +54,17 @@
       var markers = [];
 
       // after the geojson is loaded, iterate through the map data to create markers
-      // and add the pop up (info) windows
       function loadMarkers() {
         console.log('creating markers');
         map.data.forEach(function(feature) {
-          
+
           var latLng = feature.getGeometry().get();
           var title = feature.getProperty('Name');
-
           var marker = new google.maps.Marker({
             position: latLng,
             title: title,
             map: map
           });
-
           markers.push(marker)
         });
       }
