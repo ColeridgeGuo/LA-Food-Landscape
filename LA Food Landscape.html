@@ -260,6 +260,7 @@
           var places = searchBox.getPlaces();
 
           if (places.length === 0) {
+            console.log("No place found.");
             return;
           }
 
@@ -268,6 +269,11 @@
             search_marker.setMap(null);
           });
           search_markers = [];
+
+          // Hide the markers currently displaying on the map
+          markers.forEach(function(marker) {
+            marker.setVisible(false);
+          });
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
