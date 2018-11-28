@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LA Food Landscape</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<script src="jquery-3.3.1.js"></script>
+		<meta charset="utf-8">
+		<style>
+      #header {
+        float: top;
+        height: 10%;
+      }
+      #map {
+        height: 85%;
+        width: 80%;
+        padding: 20px;
+      }
+      #filter_div {
+        float: left;
+        margin: 20px;
+        overflow: scroll;
+      }
+      html, body {
+        height: 95%;
+      }
+		</style>
+	</head>
+
+	<body>
+
+		<div id="header">
+			<h1>LA Food Landscape</h1>
+		</div>
+
+		<div id="filter_div">
+			<h2>Food Categories</h2>
+			<input type="checkbox" onclick="clickBox(this,'Healthy')" id="Healthy box" >Healthy Restaurants
+			<br><br>
+			<input type="checkbox" onclick="clickBox(this,'Unhealthy')" id="Unhealthy box" >Unhealthy Restaurants
+			<br><br>
+			<input type="checkbox" onclick="clickBox(this,'Vegan')" id="Vegan box" >Vegan Restaurants
+			<br><br>
+			<input type="checkbox" onclick="clickBox(this,'Supermarket')" id="Supermarket box" >Supermarkets
+			<br><br>
+			<input type="checkbox" onclick="clickBox(this,'Grocery')" id="Grocery box" >Grocery Stores
+			<br><br>
+			<input type="checkbox" onclick="clickBox(this,'Other')" id="Other box" >Others
+			<br><br>
+		</div>
+
+		<div id="map"></div>
+
+		<script>
+      var map;
+      var markers = [];
+
+      // Create the marker and push it to the markers array
+      function createMarker(latlng,name,category) {
+
+        // Create the marker
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          title: name,
+        });
+
+        // Store the category and name info as a marker properties
+        marker.mycategory = category;
+        marker.myname = name;
+
+        markers.push(marker);
+      } // end createMarker
+
+      // Show all markers of a particular category
+      function showMarkers(category) {
+        for (var i=0; i<markers.length; i++) {
+          if (markers[i].mycategory === category) {
+            markers[i].setVisible(true);
+          }
+        }
+        // check the checkbox
+        document.getElementById(category+" box").checked = true;
+      }
+
+      // Hide all markers of a particular category
+      function hideMarkers(category) {
+        for (var i=0; i<markers.length; i++) {
+          if (markers[i].mycategory === category) {
+            markers[i].setVisible(false);
+          }
+        }
+        // clear the checkbox
+        document.getElementById(category+" box").checked = false;
+      }
+
+      // When a checkbox is checked, show the markers of its category;
+      // when a checkbox is unchecked, hide the markers of that category
+      function clickBox(box,category) {
+        if (box.checked) {
+          showMarkers(category);
+        } else {
+          hideMarkers(category);
+        }
+      }
+
+      // Initialize the map and the markers
+      function initMap() {
+        console.log('initializing map');
+        var map_center = new google.maps.LatLng(34.039435,-118.246928);
+        var map_options = {
+          zoom: 10,
+          center: map_center
+        };
+        var map_document = document.getElementById('map');
+        map = new google.maps.Map(map_document, map_options);
+
+        $(document).ready(function(){
+          $.getJSON('fake_data.json', function(data) {
+            for (var i = 0; i < data.length; i++) {
+              // obtain the attributes of each marker
+              var item = data[i];
+              var point = new google.maps.LatLng(item.Latitude, item.Longitude);
+              var name = item.Name;
+              var category = item.Description;
+              // create the marker
+              var marker = createMarker(point,name,category);
+            }
+
+            // hide and show some markers initially
+            showMarkers("Healthy");
+            hideMarkers("Unhealthy");
+            hideMarkers("Grocery");
+            hideMarkers("Supermarket");
+            hideMarkers("Vegan");
+          });
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABK3DsKer5m90lhENpsR-16mWZ5D-2NNA&libraries=places&callback=initMap"
+            async defer></script>
+	</body>
+</html>
