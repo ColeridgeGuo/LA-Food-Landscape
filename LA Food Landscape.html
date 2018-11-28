@@ -15,6 +15,26 @@
         width: 60%;
         padding: 20px;
       }
+      .controls {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 29px;
+        margin-left: 17px;
+        margin-top: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+      .controls:focus {
+        border-color: #4d90fe;
+      }
       #filter_div {
         float: left;
         margin: 20px;
@@ -59,7 +79,7 @@
              id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
       FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
 
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) LOW RISK')"
              id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
       FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
 
@@ -116,6 +136,9 @@
       RESTAURANT (61-150) SEATS MODERATE RISK<br>
 
 		</div>
+
+    <input id="pac-input" class="controls" type="text"
+           placeholder="Type in the name of restaurant">
 
 		<div id="map"></div>
 
@@ -175,9 +198,9 @@
       // Initialize the map and the markers
       function initMap() {
         console.log('initializing map');
-        var map_center = new google.maps.LatLng(34.039435,-118.246928);
+        var map_center = new google.maps.LatLng(34.068127, -118.444483);
         var map_options = {
-          zoom: 10,
+          zoom: 15,
           center: map_center
         };
         var map_document = document.getElementById('map');
@@ -196,7 +219,7 @@
             }
 
             // hide and show some markers initially
-            showMarkers("CERTIFIED FARMERS' MARKET (1-20) VENDORS");
+            hideMarkers("CERTIFIED FARMERS' MARKET (1-20) VENDORS");
             hideMarkers("CERTIFIED FARMERS' MARKET (21 + ) VENDORS");
             hideMarkers("FOOD MKT RETAIL (2,000+ SF) HIGH RISK");
             hideMarkers("FOOD MKT RETAIL (2,000+ SF) LOW RISK");
@@ -204,7 +227,7 @@
             hideMarkers("FOOD MKT RETAIL (25-1,999 SF) HIGH RISK");
             hideMarkers("FOOD MKT RETAIL (25-1,999 SF) LOW RISK");
             hideMarkers("FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK");
-            hideMarkers("RESTAURANT (0-30) SEATS HIGH RISK");
+            showMarkers("RESTAURANT (0-30) SEATS HIGH RISK");
             hideMarkers("RESTAURANT (0-30) SEATS LOW RISK");
             hideMarkers("RESTAURANT (0-30) SEATS MODERATE RISK");
             hideMarkers("RESTAURANT (151 + ) SEATS HIGH RISK");
@@ -218,6 +241,65 @@
             hideMarkers("RESTAURANT (61-150) SEATS MODERATE RISK");
 
           });
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var search_markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length === 0) {
+            return;
+          }
+
+          // Clear out the old search_markers.
+          search_markers.forEach(function(search_marker) {
+            search_marker.setMap(null);
+          });
+          search_markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(70, 70),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a search_marker for each place.
+            search_markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
         });
       }
     </script>
