@@ -9,20 +9,20 @@
       #header {
         float: top;
         height: 10%;
-			}
-			#map {
+      }
+      #map {
         height: 85%;
         width: 80%;
         padding: 20px;
-			}
-			#filter_div {
-				float: left;
+      }
+      #filter_div {
+        float: left;
         margin: 20px;
         overflow: scroll;
-			}
-			html, body {
-				height: 95%;
-			}
+      }
+      html, body {
+        height: 95%;
+      }
 		</style>
 	</head>
 
@@ -115,7 +115,7 @@
         map = new google.maps.Map(map_document, map_options);
 
         $(document).ready(function(){
-          $.getJSON('real_data.json', function(data) {
+          $.getJSON('fake_data.json', function(data) {
             for (var i = 0; i < data.length; i++) {
               // obtain the attributes of each marker
               var item = data[i];
