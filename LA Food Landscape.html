@@ -12,7 +12,7 @@
       }
       #map {
         height: 85%;
-        width: 80%;
+        width: 60%;
         padding: 20px;
       }
       #filter_div {
@@ -34,18 +34,87 @@
 
 		<div id="filter_div">
 			<h2>Food Categories</h2>
-			<input type="checkbox" onclick="clickBox(this,'Healthy')" id="Healthy box" >Healthy Restaurants
-			<br><br>
-			<input type="checkbox" onclick="clickBox(this,'Unhealthy')" id="Unhealthy box" >Unhealthy Restaurants
-			<br><br>
-			<input type="checkbox" onclick="clickBox(this,'Vegan')" id="Vegan box" >Vegan Restaurants
-			<br><br>
-			<input type="checkbox" onclick="clickBox(this,'Supermarket')" id="Supermarket box" >Supermarkets
-			<br><br>
-			<input type="checkbox" onclick="clickBox(this,'Grocery')" id="Grocery box" >Grocery Stores
-			<br><br>
-			<input type="checkbox" onclick="clickBox(this,'Other')" id="Other box" >Others
-			<br><br>
+
+      <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (1-20) VENDORS')"
+             id="CERTIFIED FARMERS' MARKET (1-20) VENDORS" >
+      CERTIFIED FARMERS' MARKET (1-20) VENDORS<br>
+
+      <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (21 + ) VENDORS')"
+             id="CERTIFIED FARMERS' MARKET (21 + ) VENDORS" >
+      CERTIFIED FARMERS' MARKET (21 + ) VENDORS<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) HIGH RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) HIGH RISK" >
+      FOOD MKT RETAIL (2,000+ SF) HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) LOW RISK" >
+      FOOD MKT RETAIL (2,000+ SF) LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) MODERATE RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) MODERATE RISK" >
+      FOOD MKT RETAIL (2,000+ SF) MODERATE RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) HIGH RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS HIGH RISK')"
+             id="RESTAURANT (0-30) SEATS HIGH RISK" >
+      RESTAURANT (0-30) SEATS HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS LOW RISK')"
+             id="RESTAURANT (0-30) SEATS LOW RISK" >
+      RESTAURANT (0-30) SEATS LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS MODERATE RISK')"
+             id="RESTAURANT (0-30) SEATS MODERATE RISK" >
+      RESTAURANT (0-30) SEATS MODERATE RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS HIGH RISK')"
+             id="RESTAURANT (151 + ) SEATS HIGH RISK" >
+      RESTAURANT (151 + ) SEATS HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS LOW RISK')"
+             id="RESTAURANT (151 + ) SEATS LOW RISK" >
+      RESTAURANT (151 + ) SEATS LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS MODERATE RISK')"
+             id="RESTAURANT (151 + ) SEATS MODERATE RISK" >
+      RESTAURANT (151 + ) SEATS MODERATE RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS HIGH RISK')"
+             id="RESTAURANT (31-60) SEATS HIGH RISK" >
+      RESTAURANT (31-60) SEATS HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS LOW RISK')"
+             id="RESTAURANT (31-60) SEATS LOW RISK" >
+      RESTAURANT (31-60) SEATS LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS MODERATE RISK')"
+             id="RESTAURANT (31-60) SEATS MODERATE RISK" >
+      RESTAURANT (31-60) SEATS MODERATE RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS HIGH RISK')"
+             id="RESTAURANT (61-150) SEATS HIGH RISK" >
+      RESTAURANT (61-150) SEATS HIGH RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS LOW RISK')"
+             id="RESTAURANT (61-150) SEATS LOW RISK" >
+      RESTAURANT (61-150) SEATS LOW RISK<br>
+
+      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS MODERATE RISK')"
+             id="RESTAURANT (61-150) SEATS MODERATE RISK" >
+      RESTAURANT (61-150) SEATS MODERATE RISK<br>
+
 		</div>
 
 		<div id="map"></div>
@@ -79,7 +148,7 @@
           }
         }
         // check the checkbox
-        document.getElementById(category+" box").checked = true;
+        document.getElementById(category).checked = true;
       }
 
       // Hide all markers of a particular category
@@ -90,7 +159,7 @@
           }
         }
         // clear the checkbox
-        document.getElementById(category+" box").checked = false;
+        document.getElementById(category).checked = false;
       }
 
       // When a checkbox is checked, show the markers of its category;
@@ -115,27 +184,42 @@
         map = new google.maps.Map(map_document, map_options);
 
         $(document).ready(function(){
-          $.getJSON('fake_data.json', function(data) {
+          $.getJSON('real_data.json', function(data) {
             for (var i = 0; i < data.length; i++) {
               // obtain the attributes of each marker
               var item = data[i];
-              var point = new google.maps.LatLng(item.Latitude, item.Longitude);
-              var name = item.Name;
-              var category = item.Description;
+              var point = new google.maps.LatLng(item.LATITUDE, item.LONGITUDE);
+              var name = item.FACILITY_NAME;
+              var category = item.PE_DESCRIPTION;
               // create the marker
               var marker = createMarker(point,name,category);
             }
 
             // hide and show some markers initially
-            showMarkers("Healthy");
-            hideMarkers("Unhealthy");
-            hideMarkers("Grocery");
-            hideMarkers("Supermarket");
-            hideMarkers("Vegan");
+            showMarkers("CERTIFIED FARMERS' MARKET (1-20) VENDORS");
+            hideMarkers("CERTIFIED FARMERS' MARKET (21 + ) VENDORS");
+            hideMarkers("FOOD MKT RETAIL (2,000+ SF) HIGH RISK");
+            hideMarkers("FOOD MKT RETAIL (2,000+ SF) LOW RISK");
+            hideMarkers("FOOD MKT RETAIL (2,000+ SF) MODERATE RISK");
+            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) HIGH RISK");
+            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) LOW RISK");
+            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK");
+            hideMarkers("RESTAURANT (0-30) SEATS HIGH RISK");
+            hideMarkers("RESTAURANT (0-30) SEATS LOW RISK");
+            hideMarkers("RESTAURANT (0-30) SEATS MODERATE RISK");
+            hideMarkers("RESTAURANT (151 + ) SEATS HIGH RISK");
+            hideMarkers("RESTAURANT (151 + ) SEATS LOW RISK");
+            hideMarkers("RESTAURANT (151 + ) SEATS MODERATE RISK");
+            hideMarkers("RESTAURANT (31-60) SEATS HIGH RISK");
+            hideMarkers("RESTAURANT (31-60) SEATS LOW RISK");
+            hideMarkers("RESTAURANT (31-60) SEATS MODERATE RISK");
+            hideMarkers("RESTAURANT (61-150) SEATS HIGH RISK");
+            hideMarkers("RESTAURANT (61-150) SEATS LOW RISK");
+            hideMarkers("RESTAURANT (61-150) SEATS MODERATE RISK");
+
           });
         });
       }
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABK3DsKer5m90lhENpsR-16mWZ5D-2NNA&libraries=places&callback=initMap"
             async defer></script>
