@@ -101,7 +101,7 @@
       searchBox.setBounds(map.getBounds());
     });
 
-    var markers = [];
+    var search_markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
@@ -111,11 +111,11 @@
         return;
       }
 
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
+      // Clear out the old search_markers.
+      search_markers.forEach(function(marker) {
         marker.setMap(null);
       });
-      markers = [];
+      search_markers = [];
 
       // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
@@ -133,7 +133,7 @@
         };
 
         // Create a marker for each place.
-        markers.push(new google.maps.Marker({
+        search_markers.push(new google.maps.Marker({
           map: map,
           icon: icon,
           title: place.name,
@@ -151,7 +151,7 @@
     });
   }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABK3DsKer5m90lhENpsR-16mWZ5D-2NNA&libraries=places&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH0rgH9Vdu6cNf0wkKJI7Sl6hUqCfzfSE&libraries=places&callback=initMap"
         async defer></script>
 </body>
 </html>
