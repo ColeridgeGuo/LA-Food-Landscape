@@ -38,7 +38,6 @@
       #filter_div {
         float: left;
         margin: 20px;
-        overflow: scroll;
       }
       html, body {
         height: 95%;
@@ -145,6 +144,7 @@
 		<script>
       var map;
       var markers = [];
+      var src = 'http://cs.furman.edu/~yguo/LA_Food_Landscape/LA%20County%20Zip%20Codes.kml';
 
       // Create the marker and push it to the markers array
       function createMarker(latlng,name,category) {
@@ -309,7 +309,7 @@
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDH0rgH9Vdu6cNf0wkKJI7Sl6hUqCfzfSE&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoKfFA-bQiv6r8RcN500UdK-cf-CTwPbQ&libraries=places&callback=initMap"
             async defer></script>
 	</body>
 </html>
