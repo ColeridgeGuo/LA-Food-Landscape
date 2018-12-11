@@ -1,315 +1,339 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>LA Food Landscape</title>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-		<script src="jquery-3.3.1.js"></script>
-		<meta charset="utf-8">
-		<style>
-      #header {
-        float: top;
-        height: 10%;
+<html id="all">
+<head>
+  <title>LA Food Landscape</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <script src="jquery-3.3.1.js"></script>
+  <meta charset="utf-8">
+  <style>
+    #all {
+      background-color: rgba(181, 149, 255, 0.21);
+    }
+    #header {
+      float: top;
+      height: 10%;
+    }
+    #map {
+      height: 85%;
+      width: 60%;
+      padding: 20px;
+    }
+    #furman_logo {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    #ucla_logo {
+      position: absolute;
+      top: 20px;
+      right: 100px;
+    }
+    .controls {
+      background-color: #fff;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      height: 29px;
+      margin-left: 17px;
+      margin-top: 10px;
+      outline: none;
+      padding: 0 11px 0 13px;
+      text-overflow: ellipsis;
+      width: 400px;
+    }
+    .controls:focus {
+      border-color: #4d90fe;
+    }
+    #filter_div {
+      float: left;
+      margin: 20px;
+    }
+    html, body {
+      height: 95%;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="header">
+  <h1>LA Food Landscape</h1>
+  <a href="http://www.furman.edu"><img src="Furman_logo.jpg" width="80" height="80" id="furman_logo"></a>
+  <a href="http://www.ucla.edu"><img src="UCLA_logo.png" width="100" height="50" id="ucla_logo"></a>
+</div>
+
+<div id="filter_div">
+  <h2>Food Categories</h2>
+
+  <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (1-20) VENDORS')"
+         id="CERTIFIED FARMERS' MARKET (1-20) VENDORS" >
+  CERTIFIED FARMERS' MARKET (1-20) VENDORS<br>
+
+  <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (21 + ) VENDORS')"
+         id="CERTIFIED FARMERS' MARKET (21 + ) VENDORS" >
+  CERTIFIED FARMERS' MARKET (21 + ) VENDORS<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) HIGH RISK')"
+         id="FOOD MKT RETAIL (2,000+ SF) HIGH RISK" >
+  FOOD MKT RETAIL (2,000+ SF) HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
+         id="FOOD MKT RETAIL (2,000+ SF) LOW RISK" >
+  FOOD MKT RETAIL (2,000+ SF) LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) MODERATE RISK')"
+         id="FOOD MKT RETAIL (2,000+ SF) MODERATE RISK" >
+  FOOD MKT RETAIL (2,000+ SF) MODERATE RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) HIGH RISK')"
+         id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
+  FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) LOW RISK')"
+         id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
+  FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK')"
+         id="FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK" >
+  FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS HIGH RISK')"
+         id="RESTAURANT (0-30) SEATS HIGH RISK" >
+  RESTAURANT (0-30) SEATS HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS LOW RISK')"
+         id="RESTAURANT (0-30) SEATS LOW RISK" >
+  RESTAURANT (0-30) SEATS LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS MODERATE RISK')"
+         id="RESTAURANT (0-30) SEATS MODERATE RISK" >
+  RESTAURANT (0-30) SEATS MODERATE RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS HIGH RISK')"
+         id="RESTAURANT (151 + ) SEATS HIGH RISK" >
+  RESTAURANT (151 + ) SEATS HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS LOW RISK')"
+         id="RESTAURANT (151 + ) SEATS LOW RISK" >
+  RESTAURANT (151 + ) SEATS LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS MODERATE RISK')"
+         id="RESTAURANT (151 + ) SEATS MODERATE RISK" >
+  RESTAURANT (151 + ) SEATS MODERATE RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS HIGH RISK')"
+         id="RESTAURANT (31-60) SEATS HIGH RISK" >
+  RESTAURANT (31-60) SEATS HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS LOW RISK')"
+         id="RESTAURANT (31-60) SEATS LOW RISK" >
+  RESTAURANT (31-60) SEATS LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS MODERATE RISK')"
+         id="RESTAURANT (31-60) SEATS MODERATE RISK" >
+  RESTAURANT (31-60) SEATS MODERATE RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS HIGH RISK')"
+         id="RESTAURANT (61-150) SEATS HIGH RISK" >
+  RESTAURANT (61-150) SEATS HIGH RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS LOW RISK')"
+         id="RESTAURANT (61-150) SEATS LOW RISK" >
+  RESTAURANT (61-150) SEATS LOW RISK<br>
+
+  <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS MODERATE RISK')"
+         id="RESTAURANT (61-150) SEATS MODERATE RISK" >
+  RESTAURANT (61-150) SEATS MODERATE RISK<br>
+
+</div>
+
+<input id="pac-input" class="controls" type="text"
+       placeholder="Type in the name of restaurant">
+
+<div id="map"></div>
+
+<script>
+  var map;
+  var markers = [];
+  var zipcodeURl = 'http://cs.furman.edu/~yguo/LA_Food_Landscape/LA%20County%20Zip%20Codes.geojson';
+
+  // Create the marker and push it to the markers array
+  function createMarker(latlng,name,category) {
+
+    // Create the marker
+    var marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      title: name,
+    });
+
+    // Store the category and name info as a marker properties
+    marker.mycategory = category;
+    marker.myname = name;
+
+    markers.push(marker);
+  } // end createMarker
+
+  // Show all markers of a particular category
+  function showMarkers(category) {
+    for (var i=0; i<markers.length; i++) {
+      if (markers[i].mycategory === category) {
+        markers[i].setVisible(true);
       }
-      #map {
-        height: 85%;
-        width: 60%;
-        padding: 20px;
+    }
+    // check the checkbox
+    document.getElementById(category).checked = true;
+  }
+
+  // Hide all markers of a particular category
+  function hideMarkers(category) {
+    for (var i=0; i<markers.length; i++) {
+      if (markers[i].mycategory === category) {
+        markers[i].setVisible(false);
       }
-      .controls {
-        background-color: #fff;
-        border-radius: 2px;
-        border: 1px solid transparent;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        box-sizing: border-box;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        height: 29px;
-        margin-left: 17px;
-        margin-top: 10px;
-        outline: none;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-      .controls:focus {
-        border-color: #4d90fe;
-      }
-      #filter_div {
-        float: left;
-        margin: 20px;
-      }
-      html, body {
-        height: 95%;
-      }
-		</style>
-	</head>
+    }
+    // clear the checkbox
+    document.getElementById(category).checked = false;
+  }
 
-	<body>
+  // When a checkbox is checked, show the markers of its category;
+  // when a checkbox is unchecked, hide the markers of that category
+  function clickBox(box,category) {
+    if (box.checked) {
+      showMarkers(category);
+    } else {
+      hideMarkers(category);
+    }
+  }
 
-		<div id="header">
-			<h1>LA Food Landscape</h1>
-		</div>
+  // Initialize the map and the markers
+  function initMap() {
+    console.log('initializing map');
+    var map_center = new google.maps.LatLng(34.068127, -118.444483);
+    var map_options = {
+      zoom: 15,
+      center: map_center
+    };
+    var map_document = document.getElementById('map');
+    map = new google.maps.Map(map_document, map_options);
 
-		<div id="filter_div">
-			<h2>Food Categories</h2>
+    // Load the zip code regions and set the styles
+    map.data.loadGeoJson(zipcodeURl);
+    map.data.setStyle({
+      fillColor: '#ffffff',
+      fillOpacity: 0,
+      strokeColor: '#a386e7',
+      strokeWeight: 3
+    });
 
-      <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (1-20) VENDORS')"
-             id="CERTIFIED FARMERS' MARKET (1-20) VENDORS" >
-      CERTIFIED FARMERS' MARKET (1-20) VENDORS<br>
-
-      <input type="checkbox" onclick="clickBox(this,'CERTIFIED FARMERS\' MARKET (21 + ) VENDORS')"
-             id="CERTIFIED FARMERS' MARKET (21 + ) VENDORS" >
-      CERTIFIED FARMERS' MARKET (21 + ) VENDORS<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) HIGH RISK')"
-             id="FOOD MKT RETAIL (2,000+ SF) HIGH RISK" >
-      FOOD MKT RETAIL (2,000+ SF) HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
-             id="FOOD MKT RETAIL (2,000+ SF) LOW RISK" >
-      FOOD MKT RETAIL (2,000+ SF) LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (2,000+ SF) MODERATE RISK')"
-             id="FOOD MKT RETAIL (2,000+ SF) MODERATE RISK" >
-      FOOD MKT RETAIL (2,000+ SF) MODERATE RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) HIGH RISK')"
-             id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
-      FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) LOW RISK')"
-             id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
-      FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK')"
-             id="FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK" >
-      FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS HIGH RISK')"
-             id="RESTAURANT (0-30) SEATS HIGH RISK" >
-      RESTAURANT (0-30) SEATS HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS LOW RISK')"
-             id="RESTAURANT (0-30) SEATS LOW RISK" >
-      RESTAURANT (0-30) SEATS LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (0-30) SEATS MODERATE RISK')"
-             id="RESTAURANT (0-30) SEATS MODERATE RISK" >
-      RESTAURANT (0-30) SEATS MODERATE RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS HIGH RISK')"
-             id="RESTAURANT (151 + ) SEATS HIGH RISK" >
-      RESTAURANT (151 + ) SEATS HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS LOW RISK')"
-             id="RESTAURANT (151 + ) SEATS LOW RISK" >
-      RESTAURANT (151 + ) SEATS LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (151 + ) SEATS MODERATE RISK')"
-             id="RESTAURANT (151 + ) SEATS MODERATE RISK" >
-      RESTAURANT (151 + ) SEATS MODERATE RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS HIGH RISK')"
-             id="RESTAURANT (31-60) SEATS HIGH RISK" >
-      RESTAURANT (31-60) SEATS HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS LOW RISK')"
-             id="RESTAURANT (31-60) SEATS LOW RISK" >
-      RESTAURANT (31-60) SEATS LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (31-60) SEATS MODERATE RISK')"
-             id="RESTAURANT (31-60) SEATS MODERATE RISK" >
-      RESTAURANT (31-60) SEATS MODERATE RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS HIGH RISK')"
-             id="RESTAURANT (61-150) SEATS HIGH RISK" >
-      RESTAURANT (61-150) SEATS HIGH RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS LOW RISK')"
-             id="RESTAURANT (61-150) SEATS LOW RISK" >
-      RESTAURANT (61-150) SEATS LOW RISK<br>
-
-      <input type="checkbox" onclick="clickBox(this,'RESTAURANT (61-150) SEATS MODERATE RISK')"
-             id="RESTAURANT (61-150) SEATS MODERATE RISK" >
-      RESTAURANT (61-150) SEATS MODERATE RISK<br>
-
-		</div>
-
-    <input id="pac-input" class="controls" type="text"
-           placeholder="Type in the name of restaurant">
-
-		<div id="map"></div>
-
-		<script>
-      var map;
-      var markers = [];
-      var src = 'http://cs.furman.edu/~yguo/LA_Food_Landscape/LA%20County%20Zip%20Codes.kml';
-
-      // Create the marker and push it to the markers array
-      function createMarker(latlng,name,category) {
-
-        // Create the marker
-        var marker = new google.maps.Marker({
-          position: latlng,
-          map: map,
-          title: name,
-        });
-
-        // Store the category and name info as a marker properties
-        marker.mycategory = category;
-        marker.myname = name;
-
-        markers.push(marker);
-      } // end createMarker
-
-      // Show all markers of a particular category
-      function showMarkers(category) {
-        for (var i=0; i<markers.length; i++) {
-          if (markers[i].mycategory === category) {
-            markers[i].setVisible(true);
-          }
+    $(document).ready(function(){
+      $.getJSON('real_data.json', function(data) {
+        for (var i = 0; i < data.length; i++) {
+          // obtain the attributes of each marker
+          var item = data[i];
+          var point = new google.maps.LatLng(item.LATITUDE, item.LONGITUDE);
+          var name = item.FACILITY_NAME;
+          var category = item.PE_DESCRIPTION;
+          // create the marker
+          var marker = createMarker(point,name,category);
         }
-        // check the checkbox
-        document.getElementById(category).checked = true;
+
+        // hide and show some markers initially
+        hideMarkers("CERTIFIED FARMERS' MARKET (1-20) VENDORS");
+        hideMarkers("CERTIFIED FARMERS' MARKET (21 + ) VENDORS");
+        hideMarkers("FOOD MKT RETAIL (2,000+ SF) HIGH RISK");
+        hideMarkers("FOOD MKT RETAIL (2,000+ SF) LOW RISK");
+        hideMarkers("FOOD MKT RETAIL (2,000+ SF) MODERATE RISK");
+        hideMarkers("FOOD MKT RETAIL (25-1,999 SF) HIGH RISK");
+        hideMarkers("FOOD MKT RETAIL (25-1,999 SF) LOW RISK");
+        hideMarkers("FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK");
+        showMarkers("RESTAURANT (0-30) SEATS HIGH RISK");
+        hideMarkers("RESTAURANT (0-30) SEATS LOW RISK");
+        hideMarkers("RESTAURANT (0-30) SEATS MODERATE RISK");
+        hideMarkers("RESTAURANT (151 + ) SEATS HIGH RISK");
+        hideMarkers("RESTAURANT (151 + ) SEATS LOW RISK");
+        hideMarkers("RESTAURANT (151 + ) SEATS MODERATE RISK");
+        hideMarkers("RESTAURANT (31-60) SEATS HIGH RISK");
+        hideMarkers("RESTAURANT (31-60) SEATS LOW RISK");
+        hideMarkers("RESTAURANT (31-60) SEATS MODERATE RISK");
+        hideMarkers("RESTAURANT (61-150) SEATS HIGH RISK");
+        hideMarkers("RESTAURANT (61-150) SEATS LOW RISK");
+        hideMarkers("RESTAURANT (61-150) SEATS MODERATE RISK");
+
+      });
+    });
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var search_markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length === 0) {
+        console.log("No place found.");
+        return;
       }
 
-      // Hide all markers of a particular category
-      function hideMarkers(category) {
-        for (var i=0; i<markers.length; i++) {
-          if (markers[i].mycategory === category) {
-            markers[i].setVisible(false);
-          }
+      // Clear out the old search_markers.
+      search_markers.forEach(function(search_marker) {
+        search_marker.setMap(null);
+      });
+      search_markers = [];
+
+      // // Hide the markers currently displaying on the map
+      // markers.forEach(function(marker) {
+      //   marker.setVisible(false);
+      // });
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
         }
-        // clear the checkbox
-        document.getElementById(category).checked = false;
-      }
-
-      // When a checkbox is checked, show the markers of its category;
-      // when a checkbox is unchecked, hide the markers of that category
-      function clickBox(box,category) {
-        if (box.checked) {
-          showMarkers(category);
-        } else {
-          hideMarkers(category);
-        }
-      }
-
-      // Initialize the map and the markers
-      function initMap() {
-        console.log('initializing map');
-        var map_center = new google.maps.LatLng(34.068127, -118.444483);
-        var map_options = {
-          zoom: 15,
-          center: map_center
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(70, 70),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
         };
-        var map_document = document.getElementById('map');
-        map = new google.maps.Map(map_document, map_options);
 
-        $(document).ready(function(){
-          $.getJSON('real_data.json', function(data) {
-            for (var i = 0; i < data.length; i++) {
-              // obtain the attributes of each marker
-              var item = data[i];
-              var point = new google.maps.LatLng(item.LATITUDE, item.LONGITUDE);
-              var name = item.FACILITY_NAME;
-              var category = item.PE_DESCRIPTION;
-              // create the marker
-              var marker = createMarker(point,name,category);
-            }
+        // Create a search_marker for each place.
+        search_markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
 
-            // hide and show some markers initially
-            hideMarkers("CERTIFIED FARMERS' MARKET (1-20) VENDORS");
-            hideMarkers("CERTIFIED FARMERS' MARKET (21 + ) VENDORS");
-            hideMarkers("FOOD MKT RETAIL (2,000+ SF) HIGH RISK");
-            hideMarkers("FOOD MKT RETAIL (2,000+ SF) LOW RISK");
-            hideMarkers("FOOD MKT RETAIL (2,000+ SF) MODERATE RISK");
-            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) HIGH RISK");
-            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) LOW RISK");
-            hideMarkers("FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK");
-            showMarkers("RESTAURANT (0-30) SEATS HIGH RISK");
-            hideMarkers("RESTAURANT (0-30) SEATS LOW RISK");
-            hideMarkers("RESTAURANT (0-30) SEATS MODERATE RISK");
-            hideMarkers("RESTAURANT (151 + ) SEATS HIGH RISK");
-            hideMarkers("RESTAURANT (151 + ) SEATS LOW RISK");
-            hideMarkers("RESTAURANT (151 + ) SEATS MODERATE RISK");
-            hideMarkers("RESTAURANT (31-60) SEATS HIGH RISK");
-            hideMarkers("RESTAURANT (31-60) SEATS LOW RISK");
-            hideMarkers("RESTAURANT (31-60) SEATS MODERATE RISK");
-            hideMarkers("RESTAURANT (61-150) SEATS HIGH RISK");
-            hideMarkers("RESTAURANT (61-150) SEATS LOW RISK");
-            hideMarkers("RESTAURANT (61-150) SEATS MODERATE RISK");
-
-          });
-        });
-
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        var search_markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length === 0) {
-            console.log("No place found.");
-            return;
-          }
-
-          // Clear out the old search_markers.
-          search_markers.forEach(function(search_marker) {
-            search_marker.setMap(null);
-          });
-          search_markers = [];
-
-          // Hide the markers currently displaying on the map
-          markers.forEach(function(marker) {
-            marker.setVisible(false);
-          });
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(70, 70),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a search_marker for each place.
-            search_markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoKfFA-bQiv6r8RcN500UdK-cf-CTwPbQ&libraries=places&callback=initMap"
-            async defer></script>
-	</body>
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoKfFA-bQiv6r8RcN500UdK-cf-CTwPbQ&libraries=places&callback=initMap"
+        async defer></script>
+</body>
 </html>
