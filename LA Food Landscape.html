@@ -52,11 +52,20 @@
       float: left;
       margin: 20px;
     }
+    #restaurantCBs {
+      height: 220px;
+      overflow: scroll;
+    }
+    #healthCBs {
+      height: 220px;
+      overflow: scroll;
+    }
     html, body {
       height: 95%;
     }
     #about {
       position: absolute;
+      right: 20px;
       bottom: 10px;
     }
   </style>
@@ -73,87 +82,92 @@
 <div id="filter_div">
   <div id="restaurantCat">
   <h2>Restaurant Types</h2>
-    <input type="checkbox" onclick="clickBoxByCat(this,'CERTIFIED FARMERS\' MARKET (1-20) VENDORS')"
-           id="CERTIFIED FARMERS' MARKET (1-20) VENDORS" >
-    CERTIFIED FARMERS' MARKET (1-20) VENDORS<br>
+    <div id="restaurantCBs">
+      <input type="checkbox" onclick="clickBoxByCat(this,'CERTIFIED FARMERS\' MARKET (1-20) VENDORS')"
+             id="CERTIFIED FARMERS' MARKET (1-20) VENDORS" >
+      CERTIFIED FARMERS' MARKET (1-20) VENDORS<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'CERTIFIED FARMERS\' MARKET (21 + ) VENDORS')"
-           id="CERTIFIED FARMERS' MARKET (21 + ) VENDORS" >
-    CERTIFIED FARMERS' MARKET (21 + ) VENDORS<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'CERTIFIED FARMERS\' MARKET (21 + ) VENDORS')"
+             id="CERTIFIED FARMERS' MARKET (21 + ) VENDORS" >
+      CERTIFIED FARMERS' MARKET (21 + ) VENDORS<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) HIGH RISK')"
-           id="FOOD MKT RETAIL (2,000+ SF) HIGH RISK" >
-    FOOD MKT RETAIL (2,000+ SF) HIGH RISK<br>
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
-           id="FOOD MKT RETAIL (2,000+ SF) LOW RISK" >
-    FOOD MKT RETAIL (2,000+ SF) LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) HIGH RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) HIGH RISK" >
+      FOOD MKT RETAIL (2,000+ SF) HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) LOW RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) LOW RISK" >
+      FOOD MKT RETAIL (2,000+ SF) LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) MODERATE RISK')"
-           id="FOOD MKT RETAIL (2,000+ SF) MODERATE RISK" >
-    FOOD MKT RETAIL (2,000+ SF) MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (2,000+ SF) MODERATE RISK')"
+             id="FOOD MKT RETAIL (2,000+ SF) MODERATE RISK" >
+      FOOD MKT RETAIL (2,000+ SF) MODERATE RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) HIGH RISK')"
-           id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
-    FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) HIGH RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) HIGH RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) HIGH RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) LOW RISK')"
-           id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
-    FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) LOW RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) LOW RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK')"
-           id="FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK" >
-    FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK')"
+             id="FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK" >
+      FOOD MKT RETAIL (25-1,999 SF) MODERATE RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS HIGH RISK')"
-           id="RESTAURANT (0-30) SEATS HIGH RISK" >
-    RESTAURANT (0-30) SEATS HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS HIGH RISK')"
+             id="RESTAURANT (0-30) SEATS HIGH RISK" >
+      RESTAURANT (0-30) SEATS HIGH RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS LOW RISK')"
-           id="RESTAURANT (0-30) SEATS LOW RISK" >
-    RESTAURANT (0-30) SEATS LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS LOW RISK')"
+             id="RESTAURANT (0-30) SEATS LOW RISK" >
+      RESTAURANT (0-30) SEATS LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS MODERATE RISK')"
-           id="RESTAURANT (0-30) SEATS MODERATE RISK" >
-    RESTAURANT (0-30) SEATS MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (0-30) SEATS MODERATE RISK')"
+             id="RESTAURANT (0-30) SEATS MODERATE RISK" >
+      RESTAURANT (0-30) SEATS MODERATE RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS HIGH RISK')"
-           id="RESTAURANT (151 + ) SEATS HIGH RISK" >
-    RESTAURANT (151 + ) SEATS HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS HIGH RISK')"
+             id="RESTAURANT (151 + ) SEATS HIGH RISK" >
+      RESTAURANT (151 + ) SEATS HIGH RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS LOW RISK')"
-           id="RESTAURANT (151 + ) SEATS LOW RISK" >
-    RESTAURANT (151 + ) SEATS LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS LOW RISK')"
+             id="RESTAURANT (151 + ) SEATS LOW RISK" >
+      RESTAURANT (151 + ) SEATS LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS MODERATE RISK')"
-           id="RESTAURANT (151 + ) SEATS MODERATE RISK" >
-    RESTAURANT (151 + ) SEATS MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (151 + ) SEATS MODERATE RISK')"
+             id="RESTAURANT (151 + ) SEATS MODERATE RISK" >
+      RESTAURANT (151 + ) SEATS MODERATE RISK<br>
 
-  <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS HIGH RISK')"
-         id="RESTAURANT (31-60) SEATS HIGH RISK" >
-  RESTAURANT (31-60) SEATS HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS HIGH RISK')"
+             id="RESTAURANT (31-60) SEATS HIGH RISK" >
+      RESTAURANT (31-60) SEATS HIGH RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS LOW RISK')"
-           id="RESTAURANT (31-60) SEATS LOW RISK" >
-    RESTAURANT (31-60) SEATS LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS LOW RISK')"
+             id="RESTAURANT (31-60) SEATS LOW RISK" >
+      RESTAURANT (31-60) SEATS LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS MODERATE RISK')"
-           id="RESTAURANT (31-60) SEATS MODERATE RISK" >
-    RESTAURANT (31-60) SEATS MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (31-60) SEATS MODERATE RISK')"
+             id="RESTAURANT (31-60) SEATS MODERATE RISK" >
+      RESTAURANT (31-60) SEATS MODERATE RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS HIGH RISK')"
-           id="RESTAURANT (61-150) SEATS HIGH RISK" >
-    RESTAURANT (61-150) SEATS HIGH RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS HIGH RISK')"
+             id="RESTAURANT (61-150) SEATS HIGH RISK" >
+      RESTAURANT (61-150) SEATS HIGH RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS LOW RISK')"
-           id="RESTAURANT (61-150) SEATS LOW RISK" >
-    RESTAURANT (61-150) SEATS LOW RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS LOW RISK')"
+             id="RESTAURANT (61-150) SEATS LOW RISK" >
+      RESTAURANT (61-150) SEATS LOW RISK<br>
 
-    <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS MODERATE RISK')"
-           id="RESTAURANT (61-150) SEATS MODERATE RISK" >
-    RESTAURANT (61-150) SEATS MODERATE RISK<br>
+      <input type="checkbox" onclick="clickBoxByCat(this,'RESTAURANT (61-150) SEATS MODERATE RISK')"
+             id="RESTAURANT (61-150) SEATS MODERATE RISK" >
+      RESTAURANT (61-150) SEATS MODERATE RISK<br>
+    </div>
+
   </div>
   <div id="healthCat">
     <h2>Health Categories</h2>
+    <div id="healthCBs">
+    </div>
   </div>
 </div>
 
@@ -247,7 +261,7 @@
 
   // Create the filtering checkboxes for health categories
   function createHealthCat() {
-    var healthCatDiv = document.getElementById("healthCat");
+    var healthCatDiv = document.getElementById("healthCBs");
     uniqueHealthCat.forEach(function (healthCat) {
       var cb = document.createElement("INPUT");
       cb.type = "checkbox";
